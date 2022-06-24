@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>ensa.ma</groupId>
-	<artifactId>Ecommerce</artifactId>
+	<artifactId>Api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Ecommerce</name>
 	<description>Fullstack e-commerce app</description>
