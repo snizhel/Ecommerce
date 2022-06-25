@@ -30,6 +30,19 @@ public class ProductController {
         return new ResponseEntity<List<ProductDto>>(body, HttpStatus.OK);
     }
 
+  @GetMapping("/productsByKey/{KeyWord}")
+  public ResponseEntity<List<ProductDto>> getProductsByKeyWord(@PathVariable("KeyWord") String KeyWord) {
+    List<ProductDto> body = productService.listProductsByWord(KeyWord);
+    return new ResponseEntity<List<ProductDto>>(body, HttpStatus.OK);
+  }
+
+  @GetMapping("/productsByCategoryId/{categoryId}")
+  public ResponseEntity<List<ProductDto>> getProductsByKeyWord(@PathVariable("categoryId") Long categoryId) {
+    List<ProductDto> body = productService.listProductsByCategoryId(categoryId);
+    return new ResponseEntity<List<ProductDto>>(body, HttpStatus.OK);
+  }
+
+
   @GetMapping("/productBy/{productID}")
   public ResponseEntity<ProductDto> UserbyId(@PathVariable("productID") Long productID){
     Optional<ProductDto> product1 = productService.getProduct(productID);

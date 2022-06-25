@@ -27,6 +27,7 @@ public class Product {
     @JoinColumn(name = "category_id", nullable = false)
     Category category;
 
+
     public Product(ProductDto productDto, Category category) {
         this.name = productDto.getName();
         this.imageURL = productDto.getImageURL();

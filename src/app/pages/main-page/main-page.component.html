@@ -45,10 +45,10 @@
         <div class="col-lg-6 col-sm-12">
             <form action="#" class="search">
                 <div class="input-group w-100">
-                    <input type="text" class="form-control" placeholder="Search">
+                    <input type="text" class="form-control" placeholder="Search"  #keyword>
                     <div class="input-group-append">
-                      <button class="btn btn-primary" type="submit">
-                        <i class="fa fa-search"></i>
+                      <button class="btn btn-primary" type="submit" (click)=getAllProductsByKeyWord(keyword.value)>
+                        <i class="fa fa-search" ></i>
                       </button>
                     </div>
                 </div>
@@ -57,11 +57,11 @@
         <div class="col-lg-4 col-sm-6 col-12">
             <div class="widgets-wrap float-md-right">
                 <div class="widget-header  mr-3">
-                    <a href="#" class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></a>
-                    <span class="badge badge-pill badge-danger notify">0</span>
+                    <a href="/cart" class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></a>
+                    <span class="badge badge-pill badge-danger notify">{{myCart?.cartItems?.length}}</span>
                 </div>
                 <div class="widget-header icontext">
-                    <a href="#" class="icon icon-sm rounded-circle border"><i class="fa fa-user"></i></a>
+                    <a href="/main" class="icon icon-sm rounded-circle border"><i class="fa fa-user"></i></a>
                     <div class="text">
                         <span class="text-muted">Welcome {{ user?.firstName }}</span>
                         <div > 
@@ -93,34 +93,19 @@
             <li class="nav-item" *ngIf="user?.userRole=='ADMIN_USER' || user?.userRole=='ADMIN_PROD'">
               <a class="nav-link" href="/adminPanel" >Admin Panel</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Supermarket</a>
+
+            <li class="nav-item" *ngFor="let categorie of categories" >
+              <a class="nav-link"    (click)="getAllProductsByIdCategory(categorie.id)" >{{categorie.categoryName}}</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Partnership</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Baby &amp Toys</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Fitness sport</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Clothing</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Furnitures</a>
-            </li>
+            
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"> More</a>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Foods and Drink</a>
-                <a class="dropdown-item" href="#">Home interior</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Category 1</a>
-                <a class="dropdown-item" href="#">Category 2</a>
-                <a class="dropdown-item" href="#">Category 3</a>
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"> Categories</a>
+              <div class="dropdown-menu"  >
+                <a class="dropdown-item" href="/main">All</a>
+                <a class="dropdown-item" *ngFor="let categorie of categories" 
+                (click)="getAllProductsByIdCategory(categorie.id)" >{{categorie.categoryName}}</a>
               </div>
+
             </li>
           </ul>
         </div> <!-- collapse .// -->
@@ -176,19 +161,22 @@
     
     <div >
     <div class="row" >
-        <div class="col-md-3" *ngFor="let u of products; let i=index">
-            <div href="#" class="card card-product-grid">
-                <a href="#" class="img-wrap"> <img  src="{{u.imageURL}}"> </a>
+      <form class="col-md-3" *ngFor="let u of products; let i=index" 
+        [formGroup]="addCartItem"  (ngSubmit)="addCartItemInfo(u.id)">    
+            <div href="#" class="card card-product-grid"  >
+                <a href="#" class="img-wrap"> <img  src="{{u?.imageURL}}"> </a>
                 <figcaption class="info-wrap">
-                    <div class="price mt-1">{{u.name}}</div> <!-- price-wrap.// -->
-                    <div class="price mt-1">${{u.price}}</div> <!-- price-wrap.// -->
-                    <a href="#" class="title">{{u.description}}</a>
+                    <div class="price mt-1">{{u?.name}}</div> <!-- price-wrap.// -->
+                    <div class="price mt-1">${{u?.price}}</div> <!-- price-wrap.// -->
+                    <a href="#" class="title">{{u?.description}}</a>
+                    <input type="number"  placeholder="Quantity" formControlName="quantity" />
                     <button class="btn btn-dark" >Add to cart</button>
-                    <input type="number" placeholder="Quantity"/>
+                    
+                
                 </figcaption>
             </div>
-        </div> <!-- col.// -->
-
+            <!-- <input type="number" formControlName="productId" value="{{u.id}}"  /> -->
+      </form>
 
      </div>
     </div> <!-- row.// -->
@@ -205,7 +193,7 @@
     
     
     <!-- ========================= FOOTER ========================= -->
-  <footer class="section-footer border-top bg">
+  <footer class="section-footer border-top bg" style="margin-top:100px;">
     <div class="container">
       <section class="footer-bottom row">
         <div class="col-md-2">

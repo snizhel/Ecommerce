@@ -17,14 +17,12 @@ import java.util.Date;
 public class Cart {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
 
     @Column(name = "created_date")
     private Date createdDate;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Product product;
 
@@ -35,7 +33,8 @@ public class Cart {
 
     private Long quantity;
 
-    public Cart(Product product, Long quantity, User user){
+    public Cart(Long id,Product product, Long quantity, User user){
+         this.id=id;
         this.user = user;
         this.product = product;
         this.quantity = quantity;

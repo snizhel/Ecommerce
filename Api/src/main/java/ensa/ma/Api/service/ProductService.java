@@ -29,6 +29,26 @@ public class ProductService {
         return productDtos;
     }
 
+    public List<ProductDto> listProductsByWord(String keyWord){
+      List<Product> products = productRepository.searchByTitleLike(keyWord);
+      List<ProductDto> productDtos = new ArrayList<>();
+      for(Product product : products) {
+        ProductDto productDto = getDtoFromProduct(product);
+        productDtos.add(productDto);
+      }
+      return productDtos;
+    }
+
+  public List<ProductDto> listProductsByCategoryId(Long categoryId){
+    List<Product> products = productRepository.findByCategoryId(categoryId);
+    List<ProductDto> productDtos = new ArrayList<>();
+    for(Product product : products) {
+      ProductDto productDto = getDtoFromProduct(product);
+      productDtos.add(productDto);
+    }
+    return productDtos;
+  }
+
     public static ProductDto getDtoFromProduct(Product product) {
         ProductDto productDto = new ProductDto(product);
         return productDto;

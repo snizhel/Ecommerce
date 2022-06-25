@@ -23,6 +23,23 @@ getProducts(): Observable<Product[]> {
       );
   }
 
+  getProductsByWordLike(keyWord:string): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.apiUrl}/productsByKey/${keyWord}`)
+      .pipe(map((res: Product[]) => res),
+        tap(_ => console.log('fetched productsByKey')),
+        catchError(this.handleError<Product[]>('getProductsByKey', []))
+      );
+  }
+  
+
+  getPorudctsByCategoryId(idCategory:number): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.apiUrl}/productsByCategoryId/${idCategory}`)
+      .pipe(map((res: Product[]) => res),
+        tap(_ => console.log('fetched productsByIdCategory')),
+        catchError(this.handleError<Product[]>('getPorudctsByCategoryId', []))
+      );
+  }
+
   getProductById(id:number){
     return this.http.get(`${this.apiUrl}/productBy/${id}`)
   }

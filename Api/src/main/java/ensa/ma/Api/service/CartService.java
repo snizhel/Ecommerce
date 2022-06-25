@@ -25,8 +25,20 @@ public class CartService {
 
 
     public void addToCart(AddToCartDto addToCartDto, Product product, User user){
-        Cart cart = new Cart(product, addToCartDto.getQuantity(), user);
-        cartRepository.save(cart);
+        Cart cart = new Cart(product.getId(), product, addToCartDto.getQuantity(), user);
+
+        Optional<Cart> cartOpt=cartRepository.findById(product.getId());
+
+        if(cartOpt.isPresent()){
+          Cart cart1 = new Cart();
+          cart1 = cartOpt.get();
+          cart.setQuantity(cart.getQuantity()+ cart1.getQuantity());
+          cartRepository.save(cart);
+        }else{
+          cartRepository.save(cart);
+        }
+
+
     }
 
 
@@ -65,10 +77,10 @@ public class CartService {
 
     }
 
-    public void deleteCartItems(Integer userId) {
+
+    public void clearAll(Long userId) {
         cartRepository.deleteAll();
     }
-
 
     public void deleteUserCartItems(User user) {
         cartRepository.deleteByUser(user);

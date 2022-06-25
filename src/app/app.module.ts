@@ -16,6 +16,7 @@ import { RouterModule } from '@angular/router';
 import { EditCategoryComponent } from './pages/edit-category/edit-category.component';
 import { AdminPanelComponent } from './pages/admin-panel/admin-panel.component';
 import { EditProductComponent } from './pages/edit-product/edit-product.component';
+import { CartPageComponent } from './pages/cart-page/cart-page.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { EditProductComponent } from './pages/edit-product/edit-product.componen
     EditCategoryComponent,
     AdminPanelComponent,
     EditProductComponent,
+    CartPageComponent,
   ],
   imports: [
     BrowserModule,
