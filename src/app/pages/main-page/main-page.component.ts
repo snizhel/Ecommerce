@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Product } from 'src/app/interface/product';
 import { User } from 'src/app/interface/user';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { CategoryService } from 'src/app/service/category.service';
+import { ProductService } from 'src/app/service/product.service';
 import { UserService } from 'src/app/service/user.service';
 
 @Component({
@@ -16,44 +18,47 @@ export class MainPageComponent implements OnInit {
   isLoggedin = false;
 	loggedinUser: string = '';
 
-
   user:User;
-  categories = []
-  users=[]
+
+
+  products=[];
+  prudct:Product;
 
 	constructor( private router: Router, private http: HttpClient, private authService: AuthenticationService,
-    private userService:UserService,private categoryService:CategoryService) {}
+    private userService:UserService,private productService:ProductService) {}
 
 	ngOnInit() {
-		 this.isLoggedin = this.authService.isUserLoggedin();
+		this.isLoggedin = this.authService.isUserLoggedin();
 		this.loggedinUser = this.authService.getLoggedinUser();
 
     if(!this.isLoggedin) {
 			this.router.navigateByUrl('/login');
 		}
 
-    this.userService.getCurrentUser().subscribe(
-      (response:any) => {
-          console.log(response),
-          this.user=response
-        },error => {
-          console.log('error: ', error)
-       },() =>console.log("completed"));
+    this.getCurrentUser();
+    this.getAllProducts();
 
+    }
 
-     this.categoryService.getCategories().subscribe(
-      (response:any)=>{
-        console.log(response)
-        this.categories=response;
-      });
-
-      this.userService.getAllUsers().subscribe(
+    getAllProducts(){
+      this.productService.getProducts().subscribe(
         (response:any)=>{
           console.log(response)
-          this.users=response;
-        });
-    
+          this.products=response;
+        }
+      )
     }
+
+    getCurrentUser(){
+      this.userService.getCurrentUser().subscribe(
+        (response:any) => {
+            console.log(response),
+            this.user=response
+          },error => {
+            console.log('error: ', error)
+         },() =>console.log("completed"));
+    }
+
 
   
 

@@ -11,7 +11,11 @@ import { MainPageComponent } from './pages/main-page/main-page.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpInterceptorService } from './service/httpinterceptor.service';
-import { UserComponent } from './pages/user/user.component';
+import { EditUserComponent } from './pages/edit-user/edit-user.component';
+import { RouterModule } from '@angular/router';
+import { EditCategoryComponent } from './pages/edit-category/edit-category.component';
+import { AdminPanelComponent } from './pages/admin-panel/admin-panel.component';
+import { EditProductComponent } from './pages/edit-product/edit-product.component';
 
 
 @NgModule({
@@ -20,8 +24,10 @@ import { UserComponent } from './pages/user/user.component';
     LoginPageComponent,
     RegisterPageComponent,
     MainPageComponent,
-    UserComponent,
-    UserComponent
+    EditUserComponent,
+    EditCategoryComponent,
+    AdminPanelComponent,
+    EditProductComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +35,8 @@ import { UserComponent } from './pages/user/user.component';
     HttpClientModule,
     ReactiveFormsModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ],
   providers: [
     {

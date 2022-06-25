@@ -1,5 +1,6 @@
 package ensa.ma.Api.service;
 
+import ensa.ma.Api.model.Category;
 import ensa.ma.Api.model.dataTransferObjects.RegistrationRequest;
 import ensa.ma.Api.model.dataTransferObjects.UpdateUserDto;
 import ensa.ma.Api.model.enumFolder.UserRole;
@@ -47,6 +48,9 @@ public class UserService implements UserDetailsService {
         return userRepository.findByEmail(email);
     }
 
+  public Optional<User> getUserById(Long userID) {
+      return userRepository.findById(userID);
+  }
 
 
     public User signUpUser(User user){
@@ -87,23 +91,25 @@ public class UserService implements UserDetailsService {
         );
     }
 
-    public void updateUser(UpdateUserDto request, Long userId) {
+    public void updateUser(UpdateUserDto request, Long userID) {
 
-        Optional<User> user= userRepository.findById(userId);
+        Optional<User> user= userRepository.findById(userID);
         User user1 = user.get();
 
         user1.setFirstName(request.getFirstName());
         user1.setLastName(request.getLastName());
         user1.setEmail(request.getEmail());
         user1.setUsername(request.getUsername());
-        user1.setUserRole(request.getUserRole());
+        user1.setUserRole(UserRole.valueOf(request.getUserRole()));
 
         userRepository.save(user1);
     }
 
+
     public void deleteByID(Long productID) {
         userRepository.deleteById(productID);
     }
+
 
 
 }

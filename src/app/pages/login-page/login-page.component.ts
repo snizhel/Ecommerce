@@ -31,10 +31,14 @@ export class LoginPageComponent implements OnInit {
 		}
 	}
 
+  navigateByRole(){
+
+  }
+
   doLogin() {
     (this.authService.authenticate(this.username, this.password).subscribe(
       data => {
-        this.router.navigate(['/user'])
+        this.router.navigate(['/main'])
       },
       error => {
         this.showErrorMessage=true;

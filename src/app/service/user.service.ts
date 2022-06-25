@@ -13,12 +13,14 @@ export class UserService {
 
   constructor(private http: HttpClient) {  }
 
-  register(user: object): Observable<object> {  
-    return this.http.post(`${this.apiUrl}/register`, user);  
-  } 
+
 
   getCurrentUser(){
     return this.http.get(`${this.apiUrl}/currentUser/`);
+  }
+
+  getUserById(id:number){
+    return this.http.get(`${this.apiUrl}/userBy/${id}`)
   }
 
   getAllUsers(): Observable<User[]> {
@@ -27,6 +29,26 @@ export class UserService {
         tap(_ => console.log('fetched Users')),
         catchError(this.handleError<User[]>('getUsers', []))
       );
+  }
+
+  register(user: object): Observable<object> {  
+    return this.http.post(`${this.apiUrl}/register`, user);  
+  } 
+
+  update(user:object,userId:number){
+    return this.http.post(`${this.apiUrl}/update/${userId}`,user)
+  }
+
+  updateCategory(category:object,id: number){
+    return this.http.post(`${this.apiUrl}/update/${id}`, category); 
+  }
+
+  deleteUser(userId:number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/delete/${userId}`).pipe(
+      tap(_ => console.log('deleted user')),
+      catchError(this.handleError<any>())
+    )
+
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

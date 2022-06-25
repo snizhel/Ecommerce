@@ -46,7 +46,7 @@ public class ProductService {
 
     public void updateProduct(Long productID, ProductDto productDto, Category category) {
         Product product = getProductFromDto(productDto, category);
-        product.setId(productID);
+        product.setId(productDto.getId());
         productRepository.save(product);
     }
 
@@ -57,6 +57,13 @@ public class ProductService {
             throw new IOException();
         return optionalProduct.get();
     }
+
+    public Optional<ProductDto> getProduct(Long productID) {
+      Optional<Product> product = productRepository.findById(productID);
+      Optional<ProductDto> productDto = Optional.of(getDtoFromProduct(product.get()));
+      return productDto;
+  }
+
 
     public void deleteByID(Long productID) {
         productRepository.deleteById(productID);

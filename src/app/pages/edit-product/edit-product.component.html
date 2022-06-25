@@ -1,40 +1,3 @@
-<!-- <h1>Greeting</h1>
-<div [hidden]="!isLoggedin">
-	<p>Welcome back, {{ loggedinUser }}!</p>
-	<p>Role: {{ user?.userRole }}</p>
-
-	<table  class="table table-striped" *ngIf="user?.userRole=='ADMIN'">
-		<thead class="table-light">
-			<tr>
-				<th scope=""col>ID</th>
-				<th scope=""col>First name</th>
-				<th scope=""col>Last name</th>
-				<th scope=""col>Email</th>
-				<th scope=""col>Role</th>
-			
-			</tr>
-			
-		</thead>
-		<tbody>
-			<tr *ngFor="let u of users; let i=index">
-				
-				<td>{{u.id}}</td>
-				<td>{{u.firstName}}</td>
-				<td>{{u.lastName}}</td>
-				<td>{{u.email}}</td>
-				<td>{{u.userRole}}</td>
-				
-			</tr>
-		</tbody>
-	</table>
-	
-	
-	<p><a style="text-decoration: underline; cursor: pointer;" (click)=doLogout()>Logout</a></p>
-</div>
-<div [hidden]="isLoggedin">
-	<p>Login to see your greeting</p>
-</div> -->
-
 <header class="section-header">
     <section class="header-main border-bottom">
         <div class="container">
@@ -63,9 +26,10 @@
                 <div class="widget-header icontext">
                     <a href="#" class="icon icon-sm rounded-circle border"><i class="fa fa-user"></i></a>
                     <div class="text">
-                        <span class="text-muted">Welcome {{ user?.firstName }}</span>
-                        <div > 
-						<a href="#" (click)=doLogout() *ngIf="isLoggedin"> Logout</a>
+                        <span class="text-muted">Welcome!</span>
+                        <div> 
+                            <a href="#">Sign in</a> |  
+                            <a href="#"> Register</a>
                         </div>
                     </div>
                 </div>
@@ -88,10 +52,10 @@
         <div class="collapse navbar-collapse" id="main_nav">
           <ul class="navbar-nav">
               <li class="nav-item dropdown">
-               <a class="nav-link" href="/main">Home</a>
+               <a class="nav-link" href="#">Home</a>
             </li>
-            <li class="nav-item" *ngIf="user?.userRole=='ADMIN_USER' || user?.userRole=='ADMIN_PROD'">
-              <a class="nav-link" href="/adminPanel" >Admin Panel</a>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Supermarket</a>
@@ -130,82 +94,71 @@
     </header> <!-- section-header.// -->
     
     
-    <!-- ========================= SECTION MAIN ========================= -->
-    <section class="section-main bg padding-y">
     <div class="container">
-    
-    <div class="row">
-        <aside class="col-md-3">
-            <nav class="card">
-                <ul class="menu-category">
-                    <li><a href="#">Best clothes</a></li>
-                    <li><a href="#">Automobiles</a></li>
-                    <li><a href="#">Home interior</a></li>
-                    <li><a href="#">Electronics</a></li>
-                    <li><a href="#">Technologies</a></li>
-                    <li><a href="#">Digital goods</a></li>
-                    <li class="has-submenu"><a href="#">More items</a>
-                        <ul class="submenu">
-                            <li><a href="#">Submenu name</a></li>
-                            <li><a href="#">Great submenu</a></li>
-                            <li><a href="#">Another menu</a></li>
-                            <li><a href="#">Some others</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-        </aside> <!-- col.// -->
-        <div class="col-md-9">
-            <article class="banner-wrap">
-                <img src="assets/images/2.jpg" class="w-100 rounded">
-            </article>
-        </div> <!-- col.// -->
-    </div> <!-- row.// -->
-    </div> <!-- container //  -->
-    </section>
-    <!-- ========================= SECTION MAIN END// ========================= -->
-    
-    <!-- ========================= SECTION  ========================= -->
-    <section class="section-name padding-y-sm">
-    <div class="container">
-    
-    <header class="section-heading">
-        <a href="#" class="btn btn-outline-primary float-right">See all</a>
-        <h3 class="section-title">Popular products</h3>
-    </header><!-- sect-heading -->
-    
-    <div >
-    <div class="row" >
-        <div class="col-md-3" *ngFor="let u of products; let i=index">
-            <div href="#" class="card card-product-grid">
-                <a href="#" class="img-wrap"> <img  src="{{u.imageURL}}"> </a>
-                <figcaption class="info-wrap">
-                    <div class="price mt-1">{{u.name}}</div> <!-- price-wrap.// -->
-                    <div class="price mt-1">${{u.price}}</div> <!-- price-wrap.// -->
-                    <a href="#" class="title">{{u.description}}</a>
-                    <button class="btn btn-dark" >Add to cart</button>
-                    <input type="number" placeholder="Quantity"/>
-                </figcaption>
-            </div>
-        </div> <!-- col.// -->
+       
+		<div class="card">
+			<div class="card-header">Edit Products</div>
+			<div class="card-body">
+				<form [formGroup]="updateForm"  (ngSubmit)="updateformInfo()">
 
+					<div  class="form-group">
+						<label class="control-label">Id  :</label> <input
+							type="number"  class="form-control"
+							value="{{product?.id}}" formControlName="id" />
+					</div>
 
-     </div>
-    </div> <!-- row.// -->
- 
+					<div class="form-group">
+						<label class="control-label">Name :</label> 
+                         <input
+							type="text"  class="form-control"
+							value="{{product?.name}}" formControlName="name"/>
+					</div>
 
-    </div>
+                    <div class="form-group">
+						<label class="control-label">Price :</label> 
+                         <input
+							type="number"  class="form-control"
+							value="{{product?.price}}" formControlName="price"/>
+					</div>
+
+                    <div class="form-group">
+						<label class="control-label">Image URL :</label> 
+                         <input
+							type="text"  class="form-control"
+							value="{{product?.imageURL}}" formControlName="imageURL"/>
+					</div>
+
+                    <div class="form-group">
+						<label class="control-label">Description :</label> 
+                         <input
+							type="text"  class="form-control"
+							value="{{product?.description}}" formControlName="description"/>
+					</div>
+
+          <div class="form-group">
+            <select name="categoryId" class="form-select" formControlName="categoryId">
+              <option [ngValue]="" >Select Category</option>
+              <option 
+              *ngFor="let categorie of categories" 
+              [ngValue]="categorie.id" 
+              >{{categorie.categoryName}</option>
+            </select>
+					</div>
+        
+
+					<div>
+						<button type="submit" class="btn btn-primary" style="margin-right:40px;">Save Changes</button>
+            <button routerLink="/adminPanel" class="btn btn-danger">Cancel</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
     
-    <!-- container // -->
-    </section>
-    <!-- ========================= SECTION  END// ========================= -->
     
 
-    
-    
-    
     <!-- ========================= FOOTER ========================= -->
-  <footer class="section-footer border-top bg">
+  <footer class="section-footer border-top bg" id="footer">
     <div class="container">
       <section class="footer-bottom row">
         <div class="col-md-2">

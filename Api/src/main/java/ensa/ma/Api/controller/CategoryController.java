@@ -1,6 +1,7 @@
 package ensa.ma.Api.controller;
 
 import ensa.ma.Api.model.Category;
+import ensa.ma.Api.model.User;
 import ensa.ma.Api.service.CategoryService;
 import ensa.ma.Api.util.ApiResponse;
 import ensa.ma.Api.util.Helper;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/category")
@@ -25,6 +27,15 @@ public class CategoryController {
         List<Category> body = categoryService.listCategories();
         return new ResponseEntity<List<Category>>(body, HttpStatus.OK);
     }
+
+  @GetMapping("/categoryBy/{categoryID}")
+  public ResponseEntity<Category> UserbyId(@PathVariable("categoryID") Long categoryID){
+    Optional<Category> category1 = categoryService.getCategoryById(categoryID);
+    Category category = new Category();
+    category = category1.get();
+    return new ResponseEntity<Category>(category,HttpStatus.OK);
+
+  }
 
     @PostMapping("/create")
     public ResponseEntity<ApiResponse> createCategory(@Valid @RequestBody Category category) {

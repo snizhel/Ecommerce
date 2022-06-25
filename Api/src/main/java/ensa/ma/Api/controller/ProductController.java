@@ -1,6 +1,7 @@
 package ensa.ma.Api.controller;
 
 import ensa.ma.Api.model.Category;
+import ensa.ma.Api.model.Product;
 import ensa.ma.Api.model.dataTransferObjects.ProductDto;
 import ensa.ma.Api.service.CategoryService;
 import ensa.ma.Api.service.ProductService;
@@ -29,6 +30,15 @@ public class ProductController {
         return new ResponseEntity<List<ProductDto>>(body, HttpStatus.OK);
     }
 
+  @GetMapping("/productBy/{productID}")
+  public ResponseEntity<ProductDto> UserbyId(@PathVariable("productID") Long productID){
+    Optional<ProductDto> product1 = productService.getProduct(productID);
+    ProductDto product = new ProductDto();
+    product = product1.get();
+    return new ResponseEntity<ProductDto>(product,HttpStatus.OK);
+
+  }
+
     @PostMapping("/add")
     public ResponseEntity<ApiResponse> addProduct(@RequestBody ProductDto productDto) {
         Optional<Category> optionalCategory = categoryService.readCategory(productDto.getCategoryId());
@@ -41,13 +51,13 @@ public class ProductController {
     }
 
     @PostMapping("/update/{productID}")
-    public ResponseEntity<ApiResponse> updateProduct(@PathVariable("productID") Long productID, @RequestBody @Valid ProductDto productDto) {
-        Optional<Category> optionalCategory = categoryService.readCategory(productDto.getCategoryId());
+    public ResponseEntity<ApiResponse> updateProduct(@PathVariable("productID") Long productID, @RequestBody ProductDto productDto) {
+        Optional<Category> optionalCategory = categoryService.readCategory(Long.valueOf(productDto.getCategoryId()));
         if (!optionalCategory.isPresent()) {
-            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "category is invalid"), HttpStatus.CONFLICT);
+            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Product is invalid"), HttpStatus.CONFLICT);
         }
         Category category = optionalCategory.get();
-        productService.updateProduct(Long.valueOf(productID), productDto, category);
+        productService.updateProduct(productID, productDto, category);
         return new ResponseEntity<ApiResponse>(new ApiResponse(true, "Product has been updated"), HttpStatus.OK);
     }
 

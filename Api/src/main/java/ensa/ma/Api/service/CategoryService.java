@@ -1,6 +1,7 @@
 package ensa.ma.Api.service;
 
 import ensa.ma.Api.model.Category;
+import ensa.ma.Api.model.User;
 import ensa.ma.Api.repos.CategoryRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -43,4 +44,11 @@ public class CategoryService {
     public void deleteByID(Long categoryID) {
         categoryrepository.deleteById(categoryID);
     }
+
+  public Optional<Category> getCategoryById(Long categoryID) {
+
+      return categoryrepository.findById(categoryID);
+  }
+
+
 }
