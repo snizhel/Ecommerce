@@ -2,9 +2,9 @@
     <section class="header-main border-bottom">
         <div class="container">
     <div class="row align-items-center">
-        <div class="col-lg-2 col-4">
-            Amazon
-        </div>
+      <div class="col-lg-2 col-4" >
+        <img src="assets/images/logos/logo8.png" style="width:130px;height: 20px;" >
+      </div>
         <div class="col-lg-6 col-sm-12">
             <form action="#" class="search">
                 <div class="input-group w-100">
@@ -54,13 +54,7 @@
                <a class="nav-link" href="/main">Home</a>
             </li>
             
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"> Management</a>
-              <div class="dropdown-menu">
-                <a class="dropdown-item">Product</a>
-                <a class="dropdown-item">Category</a>
-              </div>
-            </li>
+            
           </ul>
         </div> <!-- collapse .// -->
       </div> <!-- container .// -->
@@ -111,7 +105,7 @@
                               <td><input  value="{{cartItem.quantity}}" type="number" #quantity/></td>
                               <td>${{cartItem?.product.price}}</td>
                               <td>${{cartItem.quantity*cartItem.product.price}}</td>
-                              <td><img src="{{cartItem.product.imageURL}}"></td>
+                              <td><img class="img1" src="{{cartItem.product.imageURL}}"></td>
                               <td><button 
                                 (click)=updateformInfo(cartItem?.id,cartItem?.product.id,quantity.value) class="btn btn-dark">Edit</button></td>
                               <td><button (click)=DeleteCartItemById(cartItem.id) class="btn btn-danger">Supprimer</button></td>
@@ -130,23 +124,20 @@
 
 
     <!-- ========================= FOOTER ========================= -->
-  <footer class="section-footer border-top bg" id="footer">
-    <div class="container">
-      <section class="footer-bottom row">
-        <div class="col-md-2">
-          <p class="text-muted">   2022 Amazon </p>
-        </div>
-        <div class="col-md-8 text-md-center">
-          <span  class="px-2">ensaf@usmba.ac.ma</span>
-          <span  class="px-2">+06 0811-0-727</span>
-          <span  class="px-2">Fes immouzer BP, 19</span>
-        </div>
-        <div class="col-md-2 text-md-right text-muted">
-          <i class="fab fa-lg fa-cc-visa"></i> 
-          <i class="fab fa-lg fa-cc-paypal"></i> 
-          <i class="fab fa-lg fa-cc-mastercard"></i>
-        </div>
-      </section>
-    </div><!-- //container -->
-  </footer>
-
+    <footer class="section-footer border-top bg" style="margin-top:100px;">
+      <div class="container">
+        <section class="footer-bottom row">
+          <div class="col-md-2">
+            <p class="text-muted">   2022 DELTA </p>
+          </div>
+          <div class="col-md-8 text-md-center">
+            <span  class="px-2">ensaf@usmba.ac.ma</span>
+            <span  class="px-2">+06 0811-0-727</span>
+            <span  class="px-2">Fes immouzer BP, 19</span>
+          </div>
+          <div class="col-md-2 text-md-right text-muted">
+            <img src="/assets/images/misc/payments.png" style="height: 30px ;">
+          </div>
+        </section>
+      </div><!-- //container -->
+    </footer>

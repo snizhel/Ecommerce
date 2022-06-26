@@ -32,10 +32,12 @@ export class EditProductComponent implements OnInit {
       (params: Params)=>{
           this.idCurrentProduct=params['idProduct'];
     
+      
 
   });
 
   this.getProductById(this.idCurrentProduct);
+  this.getAllCategories();
 }
 
 getAllCategories(){
@@ -96,7 +98,6 @@ getProductById(id:number){
   
     updateformInfo(){  
       this.productUpdated=new Product();  
-
       this.productUpdated.id=this.idCurrentProduct;
       this.productUpdated.name=this.name.value;  
       this.productUpdated.price=this.price.value; 
@@ -104,8 +105,6 @@ getProductById(id:number){
       this.productUpdated.description=this.description.value; 
       this.productUpdated.categoryId=this.categoryId.value; 
 
-      console.log(this.idCurrentProduct) ;
-      console.log(this.categoryId.value);
       this.save(this.idCurrentProduct,this.productUpdated);
     }  
     

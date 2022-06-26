@@ -35,12 +35,12 @@
 	<p>Login to see your greeting</p>
 </div> -->
 
-<header class="section-header">
+<header class="section-header" >
     <section class="header-main border-bottom">
         <div class="container">
     <div class="row align-items-center">
-        <div class="col-lg-2 col-4">
-            Amazon
+        <div class="col-lg-2 col-4" >
+          <img src="assets/images/logos/logo8.png" style="width:130px;height: 20px;" >
         </div>
         <div class="col-lg-6 col-sm-12">
             <form action="#" class="search">
@@ -62,10 +62,10 @@
                 </div>
                 <div class="widget-header icontext">
                     <a href="/main" class="icon icon-sm rounded-circle border"><i class="fa fa-user"></i></a>
-                    <div class="text">
+                    <div class="text"  style="color: white;" >
                         <span class="text-muted">Welcome {{ user?.firstName }}</span>
                         <div > 
-						<a href="#" (click)=doLogout() *ngIf="isLoggedin"> Logout</a>
+						            <a href="#" (click)=doLogout() *ngIf="isLoggedin"> Logout</a>
                         </div>
                     </div>
                 </div>
@@ -125,7 +125,6 @@
                 <ul class="menu-category">
                     <li><a href="#">Best clothes</a></li>
                     <li><a href="#">Automobiles</a></li>
-                    <li><a href="#">Home interior</a></li>
                     <li><a href="#">Electronics</a></li>
                     <li><a href="#">Technologies</a></li>
                     <li><a href="#">Digital goods</a></li>
@@ -142,7 +141,7 @@
         </aside> <!-- col.// -->
         <div class="col-md-9">
             <article class="banner-wrap">
-                <img src="assets/images/2.jpg" class="w-100 rounded">
+                <img src="assets/images/2.jpg" class="rounded" style="width:970px;height:262px;">
             </article>
         </div> <!-- col.// -->
     </div> <!-- row.// -->
@@ -151,7 +150,7 @@
     <!-- ========================= SECTION MAIN END// ========================= -->
     
     <!-- ========================= SECTION  ========================= -->
-    <section class="section-name padding-y-sm">
+    <section class="section-name padding-y-sm" style="background-color: rgb(245, 245, 245);">
     <div class="container">
     
     <header class="section-heading">
@@ -160,19 +159,23 @@
     </header><!-- sect-heading -->
     
     <div >
-    <div class="row" >
+    <div class="row"  >
       <form class="col-md-3" *ngFor="let u of products; let i=index" 
         [formGroup]="addCartItem"  (ngSubmit)="addCartItemInfo(u.id)">    
             <div href="#" class="card card-product-grid"  >
                 <a href="#" class="img-wrap"> <img  src="{{u?.imageURL}}"> </a>
                 <figcaption class="info-wrap">
-                    <div class="price mt-1">{{u?.name}}</div> <!-- price-wrap.// -->
-                    <div class="price mt-1">${{u?.price}}</div> <!-- price-wrap.// -->
-                    <a href="#" class="title">{{u?.description}}</a>
-                    <input type="number"  placeholder="Quantity" formControlName="quantity" />
-                    <button class="btn btn-dark" >Add to cart</button>
+  
+                    <div class="price mt-1 center">{{u?.name}}</div> <!-- price-wrap.// -->
+                    <div class="price mt-1 center">${{u?.price}}</div> <!-- price-wrap.// -->
+                    <a href="#" class="title" style="margin-top:5px ;margin-bottom: 5px;">{{u?.description}}</a>
+                    <table style="margin-top: 8px;">
+                      <tr>
+                        <td><button class="btn btn-dark" style="margin-right:10px;width: 160px;height: 31px ;" >Add to cart</button></td>
+                        <td><input  type="number"  placeholder="Quantity" formControlName="quantity" style="width: 83px ;border-radius: 5px;padding-left: 3px;" /></td>
                     
-                
+                  </tr>
+                  </table>
                 </figcaption>
             </div>
             <!-- <input type="number" formControlName="productId" value="{{u.id}}"  /> -->
@@ -197,7 +200,7 @@
     <div class="container">
       <section class="footer-bottom row">
         <div class="col-md-2">
-          <p class="text-muted">   2022 Amazon </p>
+          <p class="text-muted">   2022 DELTA </p>
         </div>
         <div class="col-md-8 text-md-center">
           <span  class="px-2">ensaf@usmba.ac.ma</span>
@@ -205,9 +208,7 @@
           <span  class="px-2">Fes immouzer BP, 19</span>
         </div>
         <div class="col-md-2 text-md-right text-muted">
-          <i class="fab fa-lg fa-cc-visa"></i> 
-          <i class="fab fa-lg fa-cc-paypal"></i> 
-          <i class="fab fa-lg fa-cc-mastercard"></i>
+          <img src="/assets/images/misc/payments.png" style="height: 30px ;">
         </div>
       </section>
     </div><!-- //container -->
